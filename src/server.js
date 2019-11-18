@@ -1,9 +1,12 @@
+import 'core-js/fn/object/assign';
+
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { renderToString } from 'react-dom/server';
+import { ApolloProvider, renderToStringWithData } from "react-apollo";
+import { createClient } from "shared/utils/apollo";
 
 import App from 'App.jsx';
 import backend from 'i18next-node-fs-backend';
@@ -38,16 +41,21 @@ i18n
         .use(i18nextMiddleware.handle(i18n))
         .use('/locales', express.static(`${appSrc}/shared/locales`))
         .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-        .get('/*', (req, res) => {
+        .get('/*', async (req, res) => {
           const context = {};
-          const markup = renderToString(
-            <I18nextProvider i18n={req.i18n}>
-              <StaticRouter context={context} location={req.url}>
-                <App />
-              </StaticRouter>
-            </I18nextProvider>
+          const client = createClient();
+
+          const markup = await renderToStringWithData(
+            <ApolloProvider client={client}>
+              <I18nextProvider i18n={req.i18n}>
+                <StaticRouter context={context} location={req.url}>
+                  <App />
+                </StaticRouter>
+              </I18nextProvider>
+            </ApolloProvider>
           );
 
+          const initialApolloState = client.extract();
           const { url } = context;
 
           if (url) {
@@ -85,6 +93,9 @@ i18n
               <script>
                 window.initialI18nStore = JSON.parse('${JSON.stringify(initialI18nStore)}');
                 window.initialLanguage = '${initialLanguage}';
+                window.__APOLLO_STATE__ = ${JSON.stringify(
+                  initialApolloState
+                ).replace(/</g, "\\u003c")}
               </script>
           </body>
       </html>`

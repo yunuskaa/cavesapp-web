@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom';
 import { ApolloProvider, renderToStringWithData } from 'react-apollo';
 import { createClient } from 'shared/utils/apollo';
 import { I18nextProvider } from 'react-i18next';
+import { Provider as ReduxProvider } from 'react-redux';
 import backend from 'i18next-node-fs-backend';
 import express from 'express';
 import fs from 'fs';
@@ -19,6 +20,8 @@ const appSrc = resolveApp('src');
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
+
+import configureStore from 'shared/redux/store/configureStore';
 
 i18n
   .use(backend)
@@ -43,16 +46,22 @@ i18n
         .get('/*', async (req, res) => {
           const context = {};
           const client = createClient();
-
+          const preloadedState = { counter: 0 };
+          const store = configureStore(preloadedState);
+          
           const markup = await renderToStringWithData(
             <ApolloProvider client={client}>
-              <I18nextProvider i18n={req.i18n}>
-                <StaticRouter context={context} location={req.url}>
-                  <App />
-                </StaticRouter>
-              </I18nextProvider>
+              <ReduxProvider store={store}>
+                <I18nextProvider i18n={req.i18n}>
+                  <StaticRouter context={context} location={req.url}>
+                    <App />
+                  </StaticRouter>
+                </I18nextProvider>
+              </ReduxProvider>
             </ApolloProvider>
           );
+          
+          const initialReduxState = store.getState();
 
           const { url } = context;
 
@@ -67,7 +76,8 @@ i18n
             const initialAppState = {
               initialApolloState,
               initialI18nStore,
-              initialLanguage
+              initialLanguage,
+              initialReduxState,
             };
 
             const html = `<!doctype html>
@@ -82,7 +92,9 @@ i18n
 </head>
 <body>
   <div id="root">${markup}</div>
-  <script>window.__APP = ${JSON.stringify(initialAppState).replace(/</g, "\\u003c")}</script>
+  <script>
+    window.__APP = ${JSON.stringify(initialAppState).replace(/</g, "\\u003c")}
+  </script>
 </body>
 </html>`
             

@@ -11,7 +11,7 @@ import App from './App';
 const client = createClient();
 
 function BaseApp() {
-  useSSR(window.initialI18nStore, window.initialLanguage);
+  useSSR(window.__APP.initialI18nStore, window.__APP.initialLanguage);
 
   return (
     <Suspense fallback={<div>Still loading i18n...</div>}>

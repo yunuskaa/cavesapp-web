@@ -11,7 +11,8 @@ import fs from 'fs';
 import i18nextMiddleware from 'i18next-express-middleware';
 import path from 'path';
 
-import App from 'App.jsx';
+import configureStore from 'shared/redux/store/configureStore';
+import App from 'App';
 import i18n from './i18n';
 
 const appDirectory = fs.realpathSync(process.cwd());
@@ -20,8 +21,6 @@ const appSrc = resolveApp('src');
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const server = express();
-
-import configureStore from 'shared/redux/store/configureStore';
 
 i18n
   .use(backend)
@@ -48,7 +47,7 @@ i18n
           const client = createClient();
           const preloadedState = { counter: 0 };
           const store = configureStore(preloadedState);
-          
+
           const markup = await renderToStringWithData(
             <ApolloProvider client={client}>
               <ReduxProvider store={store}>
@@ -58,9 +57,9 @@ i18n
                   </StaticRouter>
                 </I18nextProvider>
               </ReduxProvider>
-            </ApolloProvider>
+            </ApolloProvider>,
           );
-          
+
           const initialReduxState = store.getState();
 
           const { url } = context;
@@ -71,7 +70,9 @@ i18n
             const initialApolloState = client.extract();
             const initialI18nStore = {};
             const initialLanguage = req.i18n.language;
-            req.i18n.languages.forEach(l => initialI18nStore[l] = req.i18n.services.resourceStore.data[l]);
+            req.i18n.languages.forEach(
+              l => (initialI18nStore[l] = req.i18n.services.resourceStore.data[l]),
+            );
 
             const initialAppState = {
               initialApolloState,
@@ -88,20 +89,24 @@ i18n
   <title>CAVES.app</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   ${assets.client.css ? `<link rel="stylesheet" href="${assets.client.css}">` : ''}
-  ${process.env.NODE_ENV === 'production' ? `<script src="${assets.client.js}" defer></script>` : `<script src="${assets.client.js}" defer crossorigin></script>`}
+  ${
+    process.env.NODE_ENV === 'production'
+      ? `<script src="${assets.client.js}" defer></script>`
+      : `<script src="${assets.client.js}" defer crossorigin></script>`
+  }
 </head>
 <body>
   <div id="root">${markup}</div>
   <script>
-    window.__APP = ${JSON.stringify(initialAppState).replace(/</g, "\\u003c")}
+    window.APP = ${JSON.stringify(initialAppState).replace(/</g, '\\u003c')}
   </script>
 </body>
-</html>`
-            
+</html>`;
+
             res.status(200).send(html);
           }
         });
-    }
-  )
+    },
+  );
 
 export default server;

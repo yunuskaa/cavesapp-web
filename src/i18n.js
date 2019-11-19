@@ -13,22 +13,22 @@ const options = {
   interpolation: {
     escapeValue: false,
     formatSeparator: ',',
-    format: (value, format, lng) => {
+    format: (value, format) => {
       if (format === 'uppercase') return value.toUpperCase();
 
       return value;
     },
   },
-  wait: process && ! process.release,
+  wait: process && !process.release,
 };
 
-if (process && ! process.release) {
+if (process && !process.release) {
   i18n
     .use(XHR)
     .use(initReactI18next)
     .use(LanguageDetector);
 }
-if (! i18n.isInitialized) {
+if (!i18n.isInitialized) {
   i18n.init(options);
 }
 

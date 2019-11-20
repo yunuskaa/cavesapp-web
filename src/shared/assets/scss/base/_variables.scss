@@ -1,0 +1,25 @@
+$primary: #4242ba;
+$error: #dc3545;
+$success: #28a745;
+$dark: #333333;
+$black: #000000;
+$white: #ffffff;
+
+$colors: (
+  primary $primary $white,
+  error $error $white,
+  success $success $white,
+  dark $dark $white,
+  light #cfcfcf $black
+);
+
+$dotWidth: 10px;
+$dotHeight: 10px;
+$dotRadius: $dotWidth/2;
+
+$dotColor: #9880ff;
+$dotBgColor: $dotColor;
+$dotBeforeColor: $dotColor;
+$dotAfterColor: $dotColor;
+
+$dotSpacing: $dotWidth + $dotWidth/2;

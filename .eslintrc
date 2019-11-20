@@ -21,6 +21,10 @@
     "import/no-unresolved": "off",
     "import/no-dynamic-require": "off",
     "import/prefer-default-export": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/button-has-type": "off",
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off"
   }
 }

@@ -1,13 +1,63 @@
-@mixin dot(
-  $width: $dotWidth,
-  $height: $dotHeight,
-  $radius: $dotRadius,
-  $bgColor: $dotBgColor,
-  $color: $dotColor
-) {
-  width: $width;
-  height: $height;
-  border-radius: $radius;
-  background-color: $bgColor;
-  color: $color;
+@mixin light($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 300;
+}
+
+@mixin regular($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 400;
+}
+
+@mixin medium($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 500;
+}
+
+@mixin semi-bold($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 600;
+}
+
+@mixin bold($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 700;
+}
+
+@mixin extra-bold($font: 'Inter') {
+  font-family: $font, sans-serif;
+  font-weight: 900;
+}
+
+@mixin not-last-child {
+  &:not(:last-child) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-horizontal-center($direction: 'row') {
+  display: flex;
+
+  @if ($direction == 'row') {
+    justify-content: center;
+  }
+  @if ($direction == 'column') {
+    align-items: center;
+  }
+}
+
+@mixin flex-vertical-center($direction: 'row') {
+  display: flex;
+
+  @if ($direction == 'row') {
+    align-items: center;
+  }
+  @if ($direction == 'column') {
+    justify-content: center;
+  }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 
+import Input from 'shared/components/UI/Input';
 import Button from 'shared/components/UI/Button';
 
 function StyleGuide() {
   return (
-    <>
+    <div className="container">
       <h1>Style Guide</h1>
       <hr />
       <h2>Buttons</h2>
@@ -48,7 +49,24 @@ function StyleGuide() {
         <Button loading>BUTTON</Button>
         <Button disabled>BUTTON</Button>
       </div>
-    </>
+      <hr />
+      <h2>Input</h2>
+      <div style={{ width: '400px' }}>
+        <Input
+          type="email"
+          placeholder="Enter an e-mail address"
+          label="E-MAIL ADDRESS"
+          id="email"
+        />
+        <Input
+          placeholder="Enter username"
+          label="USERNAME"
+          id="username"
+          hasError
+          message="Username field is required."
+        />
+      </div>
+    </div>
   );
 }
 

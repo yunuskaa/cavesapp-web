@@ -56,7 +56,7 @@
   &:disabled {
     cursor: no-drop;
   }
-  @each $variant, $background, $color in $colors {
+  @each $variant, $background, $color in $variants {
     &-#{$variant} {
       background-color: $background;
       color: $color;

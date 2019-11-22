@@ -39,5 +39,8 @@
 @import 'vendors/bootstrap/utilities';
 @import 'vendors/bootstrap/print';
 
+@import 'base/global';
+
+// Components
 @import 'components/button';
 @import 'components/form';

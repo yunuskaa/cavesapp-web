@@ -1,8 +1,9 @@
 import React from 'react';
 
+import Button from 'shared/components/UI/Button';
 import Textarea from 'shared/components/UI/Textarea';
 import Input from 'shared/components/UI/Input';
-import Button from 'shared/components/UI/Button';
+import Select from 'shared/components/UI/Select';
 
 function StyleGuide() {
   return (
@@ -10,6 +11,7 @@ function StyleGuide() {
       <h1>Style Guide</h1>
       <hr />
       <h2>Buttons</h2>
+      <br />
       <div>
         <Button>BUTTON</Button>
         <Button variant="error">BUTTON</Button>
@@ -52,6 +54,7 @@ function StyleGuide() {
       </div>
       <hr />
       <h2>Input</h2>
+      <br />
       <div style={{ width: '400px' }}>
         <Input
           type="email"
@@ -69,6 +72,7 @@ function StyleGuide() {
       </div>
       <hr />
       <h2>Textarea</h2>
+      <br />
       <div style={{ width: '400px' }}>
         <Textarea placeholder="Enter address" label="ADDRESS" id="address" />
         <Textarea
@@ -79,6 +83,47 @@ function StyleGuide() {
           message="Description field is required."
         />
       </div>
+      <hr />
+      <h2>Select</h2>
+      <br />
+      <Select
+        label="Name"
+        placeholder="Pick One"
+        options={[
+          { name: 1, title: 'Emirhan Engin' },
+          { name: 2, title: 'Yunus aka' },
+        ]}
+        onSelectItem={name => {
+          console.log('Hello?', name);
+        }}
+      />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

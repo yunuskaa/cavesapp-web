@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Textarea from 'shared/components/UI/Textarea';
 import Input from 'shared/components/UI/Input';
 import Button from 'shared/components/UI/Button';
 
@@ -64,6 +65,18 @@ function StyleGuide() {
           id="username"
           hasError
           message="Username field is required."
+        />
+      </div>
+      <hr />
+      <h2>Textarea</h2>
+      <div style={{ width: '400px' }}>
+        <Textarea placeholder="Enter address" label="ADDRESS" id="address" />
+        <Textarea
+          placeholder="Enter description"
+          label="DESCRIPTION"
+          id="description"
+          hasError
+          message="Description field is required."
         />
       </div>
     </div>

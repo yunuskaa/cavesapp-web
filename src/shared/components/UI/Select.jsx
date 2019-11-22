@@ -3,7 +3,12 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  options: PropTypes.array.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.any.isRequired,
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   onSelectItem: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   label: PropTypes.string,
@@ -38,7 +43,7 @@ function Select({ options, onSelectItem, placeholder, label, ...props }) {
     setToggleSelect(false);
     setSelected(name);
   };
-  console.log(toggleSelect);
+
   return (
     <div className={classes} {...props}>
       <div className="select-label" onClick={() => setToggleSelect(!toggleSelect)}>

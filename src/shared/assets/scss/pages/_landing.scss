@@ -339,6 +339,7 @@
     }
   }
   &-partners {
+    margin-top: 120px;
     &-button {
       display: flex;
       align-items: center;
@@ -375,11 +376,13 @@
     }
   }
   &-partner {
-    width: 100%;
-    filter: grayscale(100%);
-    transition: 120ms;
-    &:hover {
-      filter: grayscale(0);
+    img {
+      width: 100%;
+      filter: grayscale(100%);
+      transition: 120ms;
+      &:hover {
+        filter: grayscale(0);
+      }
     }
   }
   &-features {
@@ -513,6 +516,7 @@
       padding-bottom: 32px;
     }
   }
+
   &-footer {
     border-top: 2px solid #e9ebf0;
     margin-top: 152px;

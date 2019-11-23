@@ -91,7 +91,8 @@ function StyleGuide() {
         placeholder="Pick One"
         options={[
           { name: 1, title: 'Emirhan Engin' },
-          { name: 2, title: 'Yunus aka' },
+          { name: 2, title: 'Yunus Aka' },
+          { name: 3, title: 'Baran Somaklı' },
         ]}
         onSelectItem={name => {
           console.log('Hello?', name);

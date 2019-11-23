@@ -90,6 +90,7 @@ function StyleGuide() {
         label="Name"
         placeholder="Pick One"
         options={[
+          { name: 1, title: 'Emirhan Engin' },
           { name: 2, title: 'Yunus Aka' },
           { name: 3, title: 'Baran Somaklı' },
         ]}

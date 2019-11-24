@@ -340,6 +340,7 @@
   }
   &-partners {
     margin-top: 120px;
+    margin-bottom: 120px;
     &-button {
       display: flex;
       align-items: center;
@@ -382,6 +383,31 @@
       transition: 120ms;
       &:hover {
         filter: grayscale(0);
+      }
+    }
+  }
+  &-video {
+    position: relative;
+    cursor: pointer;
+    &-image {
+      img {
+        width: 100%;
+      }
+    }
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 52px;
+      height: 52px;
+      background-color: $primary;
+      border-radius: 50%;
+      box-shadow: 10px 20px 40px rgba(11, 0, 97, 0.203012);
+      img {
+        width: 20px;
       }
     }
   }
